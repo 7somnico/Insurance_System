@@ -2,75 +2,96 @@ package nz.ac.auckland.se281;
 
 import java.util.ArrayList;
 
-import org.eclipse.jgit.transport.CredentialItem.Username;
-
 import nz.ac.auckland.se281.Main.PolicyType;
-
-
-
-
 
 public class InsuranceSystem {
 
-  private String userName;
-  private int age;
+  // setting up arraylists needed
+  private ArrayList<Profile> usersList = new ArrayList<>(); // arraylist of all the profiles with their usernames and ages
+  private ArrayList<String> usernamesList = new ArrayList<String>(); // arraylist of just the usernames
 
-  private ArrayList<String> profileArrayUsername = new ArrayList<String>();
-  private ArrayList<Integer> profileArrayAge = new ArrayList<Integer>();
 
   public InsuranceSystem() {
     // Only this constructor can be used (if you need to initialise fields).
   }
 
+  // printing out the database of the profiles
   public void printDatabase() {
-    if (profileArrayUsername.size() == 0) {
-      MessageCli.PRINT_DB_POLICY_COUNT.printMessage("0","s",".");
-    } else if (profileArrayUsername.size() == 1) {
+
+    // if there are no profiles created
+    if (usersList.size() == 0) { 
+      MessageCli.PRINT_DB_POLICY_COUNT.printMessage("0","s","."); 
+
+      // if there is one profile created
+    } else if (usersList.size() == 1) { 
+      // specifying the index to be zero
+      Profile user = usersList.get(0); 
+
+      // printing out the information
       MessageCli.PRINT_DB_POLICY_COUNT.printMessage("1",":"," ");
-      System.out.println("1: " + profileArrayUsername.get(0) +  ", " + profileArrayAge.get(0));
-    } else {
+      System.out.println("1: " + user.printInfo()); 
+      
+      // for any number of profiles greater or equal to two profiles
+    } else { 
+
       MessageCli.PRINT_DB_POLICY_COUNT.printMessage("2", "s", ":");
-      for (int i = 0; i < profileArrayUsername.size(); i++) {
-        System.out.println((i+1) + ": " + profileArrayUsername.get(i) +  ", " + profileArrayAge.get(i));
+      for (int i = 0; i < usersList.size(); i++) {
+        Profile user = usersList.get(i);
+        System.out.println((i+1) + ": " + user.printInfo()); 
       }
     }
     
   }
 
   public void createNewProfile(String userName, String age) {
-    this.age = Integer.valueOf(age);
 
+    // changing the age from string to integer
+    int intAge = Integer.valueOf(age); 
+
+    // userName --> Titlecase:
     String lowerUsername = "";
-    for (int i = 1; i < userName.length(); i++) {
+
+    // for every characters in this string except the first character
+    for (int i = 1; i < userName.length(); i++) { 
       char lower = userName.charAt(i);
 
-      String lowerCharacters = (String.valueOf(lower)).toLowerCase();
+      // change them into lowercase
+      String lowerCharacters = (String.valueOf(lower)).toLowerCase(); 
 
-      lowerUsername = lowerUsername + lowerCharacters;
+      // adding the lowercased characters to the string
+      lowerUsername = lowerUsername + lowerCharacters; 
 
     }
 
-    String firstLetter = String.valueOf(userName.charAt(0)).toUpperCase();
+    // setting the first character of the string into uppercase
+    String firstLetter = String.valueOf(userName.charAt(0)).toUpperCase(); 
 
-    this.userName = firstLetter + lowerUsername;
+    // adding the uppercases and lowercases together to give a title cased string
+    userName = firstLetter + lowerUsername; 
 
 
-    if (userName.length() < 3) {
-      MessageCli.INVALID_USERNAME_TOO_SHORT.printMessage(this.userName);
-    } else if (this.age < 0) {
-      MessageCli.INVALID_AGE.printMessage(this.userName);
+    // if the username is too short (less than 3 characters)
+    if (userName.length() < 3) { 
+      MessageCli.INVALID_USERNAME_TOO_SHORT.printMessage(userName);
+
+      // if the age is negative
+    } else if (intAge < 0) { 
+      MessageCli.INVALID_AGE.printMessage(userName);
+
+      // if the username overlaps 
+    } else if (usernamesList.contains(userName)) {
+      MessageCli.INVALID_USERNAME_NOT_UNIQUE.printMessage(userName);
     } else {
-      // check if the username is unique! (have not done that part yet)
-      profileArrayUsername.add(this.userName);
-      profileArrayAge.add(this.age);
 
-      MessageCli.PROFILE_CREATED.printMessage(this.userName, age);
+      usernamesList.add(userName);
+    
+      Profile user = new Profile(userName, intAge); 
+      usersList.add(user);
+      
+      MessageCli.PROFILE_CREATED.printMessage(userName, age);
+      
+    } 
 
-    }
-
-    
-    
-    
   }
 
   public void loadProfile(String userName) {
