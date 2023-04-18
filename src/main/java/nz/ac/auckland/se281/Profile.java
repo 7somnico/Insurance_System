@@ -15,4 +15,12 @@ public class Profile {
         return (this.username + ", " + this.age);
     } 
 
+    public int getAge() {
+        return age;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
 }
