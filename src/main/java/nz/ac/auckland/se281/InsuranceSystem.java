@@ -10,10 +10,15 @@ public class InsuranceSystem {
   private ArrayList<Profile> usersList = new ArrayList<>(); // arraylist of all the profiles with their usernames and ages
   private ArrayList<String> usernamesList = new ArrayList<String>(); // arraylist of just the usernames
   private Profile loadedProfile = null;  // loaded profile, if any
+  private Life LifeInsuranceMade = null; // life insurance policy, if any
+  // private ArrayList<Car> carsInsuranceList = new ArrayList<>(); // arraylist of all the cars insurance policies
+  // private ArrayList<Home> homesInsuranceList = new ArrayList<>(); // arraylist of all the homes insurance policies 
+  // private ArrayList<Life> livesInsuranceList = new ArrayList<>(); // arraylist of all the lives insurance policies
+  private ArrayList<String> livesInsuranceNamesList = new ArrayList<String>();
 
 
   public InsuranceSystem() {
-    // Only this constructor can be used (if you need to initialise fields).
+    //
   }
 
   // printing out the database of the profiles
@@ -31,15 +36,14 @@ public class InsuranceSystem {
       // printing out the information
       MessageCli.PRINT_DB_POLICY_COUNT.printMessage("1",":"," ");
       // String loadedusersname = loadedProfileName.get(0);
-      if (loadedProfile == null) {
-        System.out.println("1: " + user.printInfo());
+
+      if (user.getUsername().equals(loadedProfile.getUsername())) {
+        System.out.println("*** 1: " + user.printInfo());
       } else {
-        if (user.getUsername().equals(loadedProfile.getUsername())) {
-          System.out.println("*** 1: " + user.printInfo());
-        } else {
-          System.out.println("1: " + user.printInfo());
-        }
+        System.out.println("1: " + user.printInfo());
       }
+      // add carsInsuranceList.size() + homesInsuranceList.size() + livesInsuranceList.size() to the end of the printInfo() method
+      
 
       // for any number of profiles greater or equal to two profiles
     } else { 
@@ -47,16 +51,27 @@ public class InsuranceSystem {
 
       for (int i = 0; i < usersList.size(); i++) {
         Profile user = usersList.get(i);
-        
-        if (loadedProfile == null) {
-          System.out.println((i+1) + ": " + user.printInfo());
+
+        if (user.getUsername().equals(loadedProfile.getUsername())) {
+          MessageCli.PRINT_DB_PROFILE_HEADER_MEDIUM.printMessage("*** ", Integer.toString(i+1), user.getUsername(), Integer.toString(user.getAge()), user.getNumOfPolicies(), user.EndingForPrintingPolicy());
         } else {
-          if (user.getUsername().equals(loadedProfile.getUsername())) {
-            System.out.println("*** " + (i+1) + ": " + user.printInfo());
-          } else {
-            System.out.println((i+1) + ": " + user.printInfo());
-          }
+          MessageCli.PRINT_DB_PROFILE_HEADER_MEDIUM.printMessage("", Integer.toString(i+1), user.getUsername(), Integer.toString(user.getAge()), user.getNumOfPolicies(), user.EndingForPrintingPolicy());
         }
+
+        
+        
+          //" %s%s: %s, %s, %s polic%s")
+        //if (loadedProfile == null) {
+          //System.out.println((i+1) + ": " + user.printInfo());
+        //} else {
+          //if (user.getUsername().equals(loadedProfile.getUsername())) {
+            //System.out.println("*** " + (i+1) + ": " + user.printInfo());
+          //} else {
+            //System.out.println((i+1) + ": " + user.printInfo());
+          //}
+        //}
+
+
       }
 
       
@@ -175,12 +190,49 @@ public class InsuranceSystem {
   }
 
   public void createPolicy(PolicyType type, String[] options) { 
+    // if there is already a life policy for a username, we cannot create another one for that person
     if (loadedProfile == null) {
-      MessageCli.NO_PROFILE_LOADED.printMessage();
+      MessageCli.NO_PROFILE_FOUND_TO_CREATE_POLICY.printMessage();
       return;
     }
-    // if there is already a life policy for a username, we cannot create another one for that person
+
+    int ageForInsurance = loadedProfile.getAge();
+    //String NameForInsurance = loadedProfile.getUsername();
+
+    // find where the loaded profile has the same name as the profile list
+    int index = usernamesList.indexOf(loadedProfile.getUsername());
+    // get the profile from the profile list
+    Profile user = usersList.get(index);
+
+    switch (type) {
+
+      case HOME:
+      user.addHomeInsurance(options, loadedProfile.getUsername());
+      MessageCli.NEW_POLICY_CREATED.printMessage("home",loadedProfile.getUsername());
+      break;
+
+      case LIFE:
+      if (ageForInsurance > 100) {
+       MessageCli.OVER_AGE_LIMIT_LIFE_POLICY.printMessage(loadedProfile.getUsername());
+        break;
+      } else if (livesInsuranceNamesList.contains(loadedProfile.getUsername())) {
+        MessageCli.ALREADY_HAS_LIFE_POLICY.printMessage(loadedProfile.getUsername());
+        break;
+      } 
+      
+      user.addLifeInsurance(options, ageForInsurance, loadedProfile.getUsername());
+      livesInsuranceNamesList.add(loadedProfile.getUsername());
+      MessageCli.NEW_POLICY_CREATED.printMessage("life",loadedProfile.getUsername());
+    
+      break;
+    
+      case CAR:
+      user.addCarInsurance(options, ageForInsurance, loadedProfile.getUsername());
+      MessageCli.NEW_POLICY_CREATED.printMessage("car",loadedProfile.getUsername());
+    } 
+    
   }
+
 }
 
 // need to do for task 2:
@@ -193,3 +245,4 @@ public class InsuranceSystem {
 
 // need to do for task 3:
 // can we use enum for rental and mechanical breakdown?
+// also does the code need to pass task 2 tests? the print statements are different for task 3
