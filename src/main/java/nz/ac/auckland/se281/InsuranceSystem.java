@@ -52,7 +52,7 @@ public class InsuranceSystem {
 
       // for any number of profiles greater or equal to two profiles
     } else { 
-      MessageCli.PRINT_DB_POLICY_COUNT.printMessage(Integer.toString(usersList.size()),"s", ":");
+      MessageCli.PRINT_DB_POLICY_COUNT.printMessage(Integer.toString(usersList.size()),"s",":");
 
       for (int i = 0; i < usersList.size(); i++) {
         Profile user = usersList.get(i);
@@ -124,8 +124,9 @@ public class InsuranceSystem {
   }
 
   /**
-   * loadProfile method loads the profile of the given username. It filters out the cases when a profile cannot
-   * be loaded: ie. there is no profile created under that Username yet
+   * loadProfile method loads the profile of the given username. It filters
+   * out the cases when a profile cannot be loaded: ie. there is no profile
+   * created under that Username yet
    * 
    * @param userName is the Username of the profile that should be loaded
    */

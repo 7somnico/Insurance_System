@@ -34,8 +34,8 @@ public class Profile {
     }
 
     /**
-     * addHomeInsurance method adds a home insurance to the profile it has been directed through the input: 
-     * Username and the options for the policy they want
+     * addHomeInsurance method adds a home insurance to the profile it has been directed
+     * through the input: Username and the options for the policy they want
      * Create a new home insurance and add it to the insuranceList
      * @param options dictates the sumInsured, address and type of home: which are the options needed to create a
      * home insurance
@@ -68,8 +68,8 @@ public class Profile {
      * addCarInsurance method adds a car insurance to the profile it has been directed through the input:
      * Username and the options for the policy they want
      * Create a new car insurance and add it to the insuranceList
-     * @param options dictates the sumInsured, make, model and year of the car: which are the options needed to create a
-     * car insurance
+     * @param options dictates the sumInsured, make, model and year of the car: which are the options needed to
+     * create a car insurance
      * @param ageForInsurance dictates the age of the user who is creating the insurance
      * @param userNameForInsurance dictates the username of the user who is creating the insurance
      */
@@ -149,7 +149,7 @@ public class Profile {
      * @return the numOfPolicies
      */
 
-    public String getNumOfPolicies() {
+     public String getNumOfPolicies() {
         return Integer.toString(numOfPolicies);
     }
     
