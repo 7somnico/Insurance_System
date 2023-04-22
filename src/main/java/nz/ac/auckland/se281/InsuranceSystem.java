@@ -7,8 +7,8 @@ import nz.ac.auckland.se281.Main.PolicyType;
 public class InsuranceSystem {
 
   // setting up arraylists needed
-  private ArrayList<Profile> usersList = new ArrayList<>(); // arraylist of all the profiles with their usernames and ages
-  private ArrayList<String> userNamesList = new ArrayList<String>(); // arraylist of just the usernames
+  private ArrayList<Profile> usersList = new ArrayList<>(); 
+  private ArrayList<String> userNamesList = new ArrayList<String>(); 
   private Profile loadedProfile = null;  // loaded profile, if any
   private ArrayList<String> livesInsuranceNamesList = new ArrayList<String>();
 
@@ -57,14 +57,21 @@ public class InsuranceSystem {
       for (int i = 0; i < usersList.size(); i++) {
         Profile user = usersList.get(i);
 
-        // print different things depending on whether a profile is loaded: This is when there is more than 1 profiles to load 
+        // print different things depending on whether a profile is loaded: This is when there is
+        // more than 1 profiles to load 
         if (loadedProfile == null) {
-          MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage("",Integer.toString(i+1),user.getUserName(),Integer.toString(user.getAge()),user.getNumOfPolicies(),user.endingForPrintingPolicy(),user.getTotalCosts(user));
+          MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage("",Integer.toString(i+1),
+          user.getUserName(),Integer.toString(user.getAge()),user.getNumOfPolicies(),
+          user.endingForPrintingPolicy(),user.getTotalCosts(user));
         } else {
           if (user.getUserName().equals(loadedProfile.getUserName())) {
-            MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage("*** ",Integer.toString(i+1),user.getUserName(), Integer.toString(user.getAge()), user.getNumOfPolicies(), user.endingForPrintingPolicy(),user.getTotalCosts(user));
+            MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage("*** ",Integer.toString(i+1),
+            user.getUserName(), Integer.toString(user.getAge()), user.getNumOfPolicies(), 
+            user.endingForPrintingPolicy(),user.getTotalCosts(user));
           } else {
-            MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage("", Integer.toString(i+1), user.getUserName(), Integer.toString(user.getAge()), user.getNumOfPolicies(), user.endingForPrintingPolicy(),user.getTotalCosts(user));
+            MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage("", Integer.toString(i+1),
+            user.getUserName(), Integer.toString(user.getAge()), user.getNumOfPolicies(),
+            user.endingForPrintingPolicy(),user.getTotalCosts(user));
           }
         }
 
@@ -72,8 +79,6 @@ public class InsuranceSystem {
         user.printPolicies(user);
 
       }
-
-      
     }
   }
 
@@ -96,9 +101,9 @@ public class InsuranceSystem {
       MessageCli.CANNOT_CREATE_WHILE_LOADED.printMessage(loadedProfile.getUserName());
       return;
     }
-
-    // filtering out the cases where we cannot create a new profile: short username, negative age and overlapping
-    // username
+    
+    // filtering out the cases where we cannot create a new profile: short username, 
+    // negative age and overlapping username
     if (userName.length() < 3) { 
       MessageCli.INVALID_USERNAME_TOO_SHORT.printMessage(userName);
 
@@ -127,7 +132,6 @@ public class InsuranceSystem {
    * loadProfile method loads the profile of the given username. It filters
    * out the cases when a profile cannot be loaded: ie. there is no profile
    * created under that Username yet
-   * 
    * @param userName is the Username of the profile that should be loaded
    */
 

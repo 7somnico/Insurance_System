@@ -51,7 +51,8 @@ public abstract class PolicyType {
     }
 
     /**
-     * get the address the policy of the policies. Specific for the home policy: It will be overriden for home.
+     * get the address the policy of the policies. Specific for the
+     * home policy: It will be overriden for home.
      * For every other policy, return "Does not exist"
      * @return "Does not exist"
      */
