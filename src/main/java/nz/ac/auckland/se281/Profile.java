@@ -96,7 +96,7 @@ public class Profile {
                     return Integer.toString(insurance.getBasePremium());
                 }
             }
-            return Integer.toString(this.initTotalCost);
+        return Integer.toString(this.initTotalCost);
             
         } else if (this.numOfPolicies == 2) {
             // 10% discount on this policy and the previous ones
@@ -105,9 +105,9 @@ public class Profile {
                     insurance.setDiscountedPremium((int) (0.9 * insurance.getBasePremium()));
                     initTotalCost += insurance.getBasePremium();
                 }
-                
             }
-            return Integer.toString((int)(0.9 * initTotalCost));
+        return Integer.toString((int) (0.9 * initTotalCost));
+
         } else {
             // 20% discount on this policy and the previous ones
             for (PolicyType insurance : insuranceList) {
@@ -131,7 +131,7 @@ public class Profile {
             // no policies
         } else {
             // print policies, depending on the type of insurance the user has
-            for (PolicyType insurance:insuranceList) {
+            for (PolicyType insurance : insuranceList) {
                 if (insurance instanceof Life) {
                     MessageCli.PRINT_DB_LIFE_POLICY.printMessage(Integer.toString(insurance.getSumInsured()), Integer.toString(insurance.getBasePremium()), Integer.toString(insurance.getDiscountedPremium()));
                 } else if (insurance instanceof Car) {

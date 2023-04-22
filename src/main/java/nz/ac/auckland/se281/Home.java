@@ -31,7 +31,8 @@ public class Home extends PolicyType {
     /**
      * @param basePremium set the discountedPremium
      */
-    @Override
+    
+     @Override
     public String getAddress() {
         return address;
     }

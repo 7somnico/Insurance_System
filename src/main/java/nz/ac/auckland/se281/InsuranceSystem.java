@@ -59,7 +59,7 @@ public class InsuranceSystem {
 
         // print different things depending on whether a profile is loaded: This is when there is more than 1 profiles to load 
         if (loadedProfile == null) {
-            MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage("", Integer.toString(i+1), user.getUserName(), Integer.toString(user.getAge()), user.getNumOfPolicies(), user.endingForPrintingPolicy(), user.getTotalCosts(user));
+          MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage("",Integer.toString(i+1),user.getUserName(),Integer.toString(user.getAge()),user.getNumOfPolicies(),user.endingForPrintingPolicy(),user.getTotalCosts(user));
         } else {
           if (user.getUserName().equals(loadedProfile.getUserName())) {
             MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage("*** ",Integer.toString(i+1),user.getUserName(), Integer.toString(user.getAge()), user.getNumOfPolicies(), user.endingForPrintingPolicy(),user.getTotalCosts(user));
