@@ -1,101 +1,164 @@
 package nz.ac.auckland.se281;
 
 import java.util.ArrayList;
-
 public class Profile {
     private String username;
     private int age;
-    protected int numOfPolicies;
-    protected int totalCosts;
+    private int numOfPolicies;
+    private int initTotalCost;
 
-    private ArrayList<Car> carsInsuranceList = new ArrayList<>(); // arraylist of all the cars insurance policies
-    private ArrayList<Home> homesInsuranceList = new ArrayList<>(); // arraylist of all the homes insurance policies
-    private ArrayList<Life> livesInsuranceList = new ArrayList<>(); // arraylist of all the lives insurance policies
+    private ArrayList<PolicyType> insuranceList = new ArrayList<>(); 
     
     // creating a constructor to be able to assign variables within a profile
     public Profile (String username, int age){
         this.username = username;
         this.age = age;
         this.numOfPolicies = 0;
-        this.totalCosts = 0;
+        this.initTotalCost = 0;
     }
 
-    // printing information (username and age)
-    public String printInfo() {
-        return (this.username + ", " + this.age);
-    } 
+    /**
+     * @return the age
+     */
 
     public int getAge() {
         return age;
     }
 
-    public String getUsername() {
+    /**
+     * @return the username
+     */
+
+    public String getUserName() {
         return username;
     }
 
+    /**
+     * addHomeInsurance method adds a home insurance to the profile it has been directed through the input: 
+     * Username and the options for the policy they want
+     * Create a new home insurance and add it to the insuranceList
+     * @param options dictates the sumInsured, address and type of home: which are the options needed to create a
+     * home insurance
+     * @param userNameForInsurance dictates the username of the user who is creating the insurance
+     */
+
     public void addHomeInsurance(String[] options, String userNameForInsurance) {
         Home homeInsuranceMade = new Home(Integer.valueOf(options[0]), options[1], options[2], userNameForInsurance);
-        homesInsuranceList.add(homeInsuranceMade);
+        insuranceList.add(homeInsuranceMade);
         numOfPolicies++;
-
-        if (numOfPolicies == 1) {
-            // no discount
-            totalCosts += homeInsuranceMade.getBasePremium();
-        } else if (numOfPolicies == 2) {
-            // 10% discount on this policy and the previous ones
-            totalCosts = (int) (0.9 * (totalCosts + homeInsuranceMade.getBasePremium()));
-        } else {
-            // 20% discount on this policy and the previous ones
-            totalCosts = (int) (0.8 * (totalCosts + homeInsuranceMade.getBasePremium()));
-        }
-        
-        // basePremiumList.add(homeInsuranceMade.getBasePremium());
-
-        // for (Integer basePremium : basePremiumList) {
-
-
-        // }
-
     }
+
+    /**
+     * addLifeInsurance method adds a life insurance to the profile it has been directed through the input: 
+     * Username and the options for the policy they want
+     * Create a new life insurance and add it to the insuranceList
+     * @param options dictates the sumInsured, which is the option needed to create a life insurance
+     * @param userNameForInsurance dictates the username of the user who is creating the insurance
+     * @param ageForInsurance dictates the age of the user who is creating the insurance
+     */
 
     public Life addLifeInsurance(String[] options, int ageForInsurance, String userNameForInsurance) {
         Life lifeInsuranceMade = new Life(Integer.valueOf(options[0]), ageForInsurance, userNameForInsurance);
-        livesInsuranceList.add(lifeInsuranceMade);
+        insuranceList.add(lifeInsuranceMade);
         numOfPolicies++;
-
         return lifeInsuranceMade;
     }
 
+    /**
+     * addCarInsurance method adds a car insurance to the profile it has been directed through the input:
+     * Username and the options for the policy they want
+     * Create a new car insurance and add it to the insuranceList
+     * @param options dictates the sumInsured, make, model and year of the car: which are the options needed to create a
+     * car insurance
+     * @param ageForInsurance dictates the age of the user who is creating the insurance
+     * @param userNameForInsurance dictates the username of the user who is creating the insurance
+     */
+
     public void addCarInsurance(String[] options, int ageForInsurance, String userNameForInsurance) {
         Car carInsuranceMade = new Car(Integer.valueOf(options[0]), options[1], options[2], options[3], ageForInsurance, userNameForInsurance);
-        carsInsuranceList.add(carInsuranceMade);
+        insuranceList.add(carInsuranceMade);
         numOfPolicies++;
     }
 
-    //public int discount(String userNameForInsurance) {
-        // find the insurances under the userNameForInsurance
-        // int i = 0;
-        // while (i <= numOfPolicies) {
-            // carsInsuranceList.indexOf(userNameForInsurance);
-            // homesInsuranceList.indexOf(userNameForInsurance);
-            // livesInsuranceList.indexOf(userNameForInsurance);
-            // i++;
-        // }
+    /**
+     * getTotalCosts method calculates the total cost of the insurance policies of a user
+     * The method differs depending on the number of policies the user has
+     * 
+     * @param user dictates the user who's total cost is being calculated
+     * @return the total cost of the user's insurance policies
+     */
 
-        // if (numOfPolicies == 2) {
-            // return 2;
-        // } else if (numOfPolicies == 1) {
-            // return 4;
-        // } else {
-            // return 0;
-        // }
-    // }
+    public String getTotalCosts(Profile user) {
+        if (this.numOfPolicies == 1) {
+            // no discount
+            for (PolicyType insurance : insuranceList) {
+                if (insurance.getUserName().equals(user.getUserName())) {
+                    return Integer.toString(insurance.getBasePremium());
+                }
+            }
+            return Integer.toString(this.initTotalCost);
+            
+        } else if (this.numOfPolicies == 2) {
+            // 10% discount on this policy and the previous ones
+            for (PolicyType insurance : insuranceList) {
+                if (insurance.getUserName().equals(user.getUserName())) {
+                    insurance.setDiscountedPremium((int) (0.9 * insurance.getBasePremium()));
+                    initTotalCost += insurance.getBasePremium();
+                }
+                
+            }
+            return Integer.toString((int)(0.9 * initTotalCost));
+        } else {
+            // 20% discount on this policy and the previous ones
+            for (PolicyType insurance : insuranceList) {
+                if (insurance.getUserName().equals(user.getUserName())) {
+                    insurance.setDiscountedPremium((int) (0.8 * insurance.getBasePremium()));
+                    initTotalCost += insurance.getBasePremium();
+                }
+            }
+            return Integer.toString((int) (0.8 * initTotalCost));
+        }
+    }
+    
+    /**
+     * printPolicies method prints the policies of a user
+     * The method differs depending on the number of policies the user has
+     * 
+     * @param user dictates the user who's policies are being printed
+     */
+    public void printPolicies(Profile user) {
+        if (numOfPolicies == 0) {
+            // no policies
+        } else {
+            // print policies, depending on the type of insurance the user has
+            for (PolicyType insurance:insuranceList) {
+                if (insurance instanceof Life) {
+                    MessageCli.PRINT_DB_LIFE_POLICY.printMessage(Integer.toString(insurance.getSumInsured()), Integer.toString(insurance.getBasePremium()), Integer.toString(insurance.getDiscountedPremium()));
+                } else if (insurance instanceof Car) {
+                    MessageCli.PRINT_DB_CAR_POLICY.printMessage(insurance.getMakeAndModel(), Integer.toString(insurance.getSumInsured()), Integer.toString(insurance.getBasePremium()), Integer.toString(insurance.getDiscountedPremium())); 
+                } else if (insurance instanceof Home) {
+                    MessageCli.PRINT_DB_HOME_POLICY.printMessage(insurance.getAddress(), Integer.toString(insurance.getSumInsured()), Integer.toString(insurance.getBasePremium()), Integer.toString(insurance.getDiscountedPremium())); 
+                }
+        
+            }
+        }
+    }
+
+    /**
+     * getNumOfPolicies method returns the number of policies a user has
+     * @return the numOfPolicies
+     */
 
     public String getNumOfPolicies() {
         return Integer.toString(numOfPolicies);
     }
     
-    public String EndingForPrintingPolicy() {
+    /**
+     * endingForPrintingPolicy method returns the correct ending for the word "policy" depending on the number of policies
+     * the user has
+     * @return the correct ending for the word "policy"
+     */
+    public String endingForPrintingPolicy() {
 
         if (this.numOfPolicies == 1) {
           return "y";
