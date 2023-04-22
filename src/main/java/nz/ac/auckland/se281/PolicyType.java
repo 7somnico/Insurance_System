@@ -1,10 +1,9 @@
 package nz.ac.auckland.se281;
 
 public abstract class PolicyType {
-    
     protected int sumInsured;
     protected String userName;
-
+    
     public PolicyType(int sumInsured, String userName) {
         this.sumInsured = sumInsured;
         this.userName = userName;
@@ -16,7 +15,7 @@ public abstract class PolicyType {
     public int getSumInsured() {
         return sumInsured;
     }
-
+    
     /**
      * @return the userName
      */
@@ -34,7 +33,7 @@ public abstract class PolicyType {
      * @param calcDiscountedPremium to set the discountedPremium as this value
      */
     public abstract void setDiscountedPremium(int calcDiscountedPremium);
-
+    
     /**
      * an abstract class to get the discounted premium of the policy
      * @return the discountedPremium
@@ -42,7 +41,8 @@ public abstract class PolicyType {
     public abstract int getDiscountedPremium();
 
     /**
-     * get the make and model of the policies. Specific for the car policy: It will be overriden for car.
+     * get the make and model of the policies. Specific for the
+     * car policy: It will be overriden for car.
      * For every other policy, return "Does not exist"
      * @return "Does not exist"
      */
@@ -59,8 +59,6 @@ public abstract class PolicyType {
     public String getAddress() {
         return "Does not exist";
     }
-
-
 
 }
 
