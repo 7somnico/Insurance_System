@@ -13,7 +13,7 @@ public class InsuranceSystem {
   private ArrayList<String> livesInsuranceNamesList = new ArrayList<String>();
 
   public InsuranceSystem() {
-    //
+  //
   }
   
   /* 
@@ -24,69 +24,69 @@ public class InsuranceSystem {
 
   public void printDatabase() {
 
-    // if there are no profiles created
-    if (usersList.size() == 0) { 
-      MessageCli.PRINT_DB_POLICY_COUNT.printMessage("0","s","."); 
-      
-      // if there is one profile created
-    } else if (usersList.size() == 1) { 
-      Profile user = usersList.get(0);
-      MessageCli.PRINT_DB_POLICY_COUNT.printMessage("1",":"," ");
-      
-      // print different things depending on whether a profile is loaded:
-      // This is when there is 1 profile to load
-      if (loadedProfile == null) {
-        MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-          "",Integer.toString(1),user.getUserName(),
-          Integer.toString(user.getAge()),user.getNumOfPolicies(),
-          user.endingForPrintingPolicy(),user.getTotalCosts(user));
-      } else {
-        if (user.getUserName().equals(loadedProfile.getUserName())) {
-          MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-            "*** ",Integer.toString(1),user.getUserName(),
-            Integer.toString(user.getAge()),user.getNumOfPolicies(),
-            user.endingForPrintingPolicy(),user.getTotalCosts(user));
-      } else {
-        MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-          "",Integer.toString(1),user.getUserName(),
-          Integer.toString(user.getAge()),user.getNumOfPolicies(),
-          user.endingForPrintingPolicy(),user.getTotalCosts(user));
-      }
-
-      // print the policies each user has signed themselves on 
-      user.printPolicies(user);
-    }
-
-    // for any number of profiles greater or equal to two profiles
-  } else { 
-    MessageCli.PRINT_DB_POLICY_COUNT.printMessage(Integer.toString(usersList.size()),"s",":");
+  // if there are no profiles created
+  if (usersList.size() == 0) { 
+    MessageCli.PRINT_DB_POLICY_COUNT.printMessage("0","s","."); 
     
-    for (int i = 0; i < usersList.size(); i++) {
-      Profile user = usersList.get(i);
-
-      // print different things depending on whether a profile is loaded:
-      // This is when there is more than 1 profiles to load 
-      if (loadedProfile == null) {
-        MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-          "",Integer.toString(i+1),user.getUserName(),
-          Integer.toString(user.getAge()),user.getNumOfPolicies(),
-          user.endingForPrintingPolicy(),user.getTotalCosts(user));
-      } else {
-        if (user.getUserName().equals(loadedProfile.getUserName())) {
-          MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-            "*** ",Integer.toString(i+1),user.getUserName(),
-            Integer.toString(user.getAge()),user.getNumOfPolicies(),
-            user.endingForPrintingPolicy(),user.getTotalCosts(user));
-      } else {
-        MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
-          "",Integer.toString(i+1),user.getUserName(),
-          Integer.toString(user.getAge()), user.getNumOfPolicies(),
-          user.endingForPrintingPolicy(),user.getTotalCosts(user));
-      }
+    // if there is one profile created
+  } else if (usersList.size() == 1) { 
+    Profile user = usersList.get(0);
+    MessageCli.PRINT_DB_POLICY_COUNT.printMessage("1",":"," ");
+    
+    // print different things depending on whether a profile is loaded:
+    // This is when there is 1 profile to load
+    if (loadedProfile == null) {
+    MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+      "",Integer.toString(1),user.getUserName(),
+      Integer.toString(user.getAge()),user.getNumOfPolicies(),
+      user.endingForPrintingPolicy(),user.getTotalCosts(user));
+    } else {
+    if (user.getUserName().equals(loadedProfile.getUserName())) {
+      MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+      "*** ",Integer.toString(1),user.getUserName(),
+      Integer.toString(user.getAge()),user.getNumOfPolicies(),
+      user.endingForPrintingPolicy(),user.getTotalCosts(user));
+    } else {
+    MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+      "",Integer.toString(1),user.getUserName(),
+      Integer.toString(user.getAge()),user.getNumOfPolicies(),
+      user.endingForPrintingPolicy(),user.getTotalCosts(user));
     }
 
     // print the policies each user has signed themselves on 
     user.printPolicies(user);
+  }
+
+  // for any number of profiles greater or equal to two profiles
+  } else { 
+  MessageCli.PRINT_DB_POLICY_COUNT.printMessage(Integer.toString(usersList.size()),"s",":");
+  
+  for (int i = 0; i < usersList.size(); i++) {
+    Profile user = usersList.get(i);
+
+    // print different things depending on whether a profile is loaded:
+    // This is when there is more than 1 profiles to load 
+    if (loadedProfile == null) {
+    MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+      "",Integer.toString(i+1),user.getUserName(),
+      Integer.toString(user.getAge()),user.getNumOfPolicies(),
+      user.endingForPrintingPolicy(),user.getTotalCosts(user));
+    } else {
+    if (user.getUserName().equals(loadedProfile.getUserName())) {
+      MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+      "*** ",Integer.toString(i+1),user.getUserName(),
+      Integer.toString(user.getAge()),user.getNumOfPolicies(),
+      user.endingForPrintingPolicy(),user.getTotalCosts(user));
+    } else {
+    MessageCli.PRINT_DB_PROFILE_HEADER_LONG.printMessage(
+      "",Integer.toString(i+1),user.getUserName(),
+      Integer.toString(user.getAge()), user.getNumOfPolicies(),
+      user.endingForPrintingPolicy(),user.getTotalCosts(user));
+    }
+  }
+
+  // print the policies each user has signed themselves on 
+  user.printPolicies(user);
   }
 }
 }
@@ -111,31 +111,31 @@ public class InsuranceSystem {
   // if a profile is already loaded, we cannot create another profile
   // until it has been unloaded
   if (loadedProfile != null) { 
-    MessageCli.CANNOT_CREATE_WHILE_LOADED.printMessage(loadedProfile.getUserName());
-    return;
+  MessageCli.CANNOT_CREATE_WHILE_LOADED.printMessage(loadedProfile.getUserName());
+  return;
   }
-    
+  
   // filtering out the cases where we cannot create a new profile:
   // short username, negative age and overlapping username
   if (userName.length() < 3) { 
-    MessageCli.INVALID_USERNAME_TOO_SHORT.printMessage(userName);
+  MessageCli.INVALID_USERNAME_TOO_SHORT.printMessage(userName);
 
   } else if (intAge < 0) { 
-    MessageCli.INVALID_AGE.printMessage(Integer.toString(intAge), userName);
+  MessageCli.INVALID_AGE.printMessage(Integer.toString(intAge), userName);
 
   } else if (userNamesList.contains(userName)) {
-    MessageCli.INVALID_USERNAME_NOT_UNIQUE.printMessage(userName);
+  MessageCli.INVALID_USERNAME_NOT_UNIQUE.printMessage(userName);
   } else {
 
-    // creating a new profile under the Username and age given afert
-    // filtering out the cases where we cannot create a new profile
-    userNamesList.add(userName);
+  // creating a new profile under the Username and age given afert
+  // filtering out the cases where we cannot create a new profile
+  userNamesList.add(userName);
+  
+  Profile user = new Profile(userName, intAge); 
+  usersList.add(user);
     
-    Profile user = new Profile(userName, intAge); 
-    usersList.add(user);
-      
-    MessageCli.PROFILE_CREATED.printMessage(userName, age);
-      
+  MessageCli.PROFILE_CREATED.printMessage(userName, age);
+    
   } 
 
 }
@@ -153,15 +153,15 @@ public class InsuranceSystem {
 
   // if the username is in the list of usernames, load the profile
   if (userNamesList.contains(userName)) {
-    // get the age from the userslist to that corresponding username
-    int loadedAge = usersList.get(userNamesList.indexOf(userName)).getAge();
+  // get the age from the userslist to that corresponding username
+  int loadedAge = usersList.get(userNamesList.indexOf(userName)).getAge();
 
-    // uploading the profile of that username as the loadedPorfile 
-    MessageCli.PROFILE_LOADED.printMessage(userName);
-    loadedProfile = new Profile(userName, loadedAge);
+  // uploading the profile of that username as the loadedPorfile 
+  MessageCli.PROFILE_LOADED.printMessage(userName);
+  loadedProfile = new Profile(userName, loadedAge);
 
   } else {
-    MessageCli.NO_PROFILE_FOUND_TO_LOAD.printMessage(userName);
+  MessageCli.NO_PROFILE_FOUND_TO_LOAD.printMessage(userName);
   }
 
 }
@@ -178,13 +178,13 @@ public class InsuranceSystem {
 
   // for every characters in this string except the first character
   for (int i = 1; i < userName.length(); i++) { 
-    char lower = userName.charAt(i);
+  char lower = userName.charAt(i);
 
-    // change them into lowercase
-    String lowerCharacters = (String.valueOf(lower)).toLowerCase(); 
+  // change them into lowercase
+  String lowerCharacters = (String.valueOf(lower)).toLowerCase(); 
 
-    // adding the lowercased characters to the string
-    lowerUserName = lowerUserName + lowerCharacters; 
+  // adding the lowercased characters to the string
+  lowerUserName = lowerUserName + lowerCharacters; 
 
   }
 
@@ -205,10 +205,10 @@ public class InsuranceSystem {
 
  public void unloadProfile() {
   if (loadedProfile != null) {
-    MessageCli.PROFILE_UNLOADED.printMessage(loadedProfile.getUserName());
-    loadedProfile = null;
+  MessageCli.PROFILE_UNLOADED.printMessage(loadedProfile.getUserName());
+  loadedProfile = null;
   } else {
-    MessageCli.NO_PROFILE_LOADED.printMessage();
+  MessageCli.NO_PROFILE_LOADED.printMessage();
   }
 }
 
@@ -228,17 +228,17 @@ public class InsuranceSystem {
   // filtering out the cases where we cannot delete a profile: that corresponding
   // is loaded, so we cannot delete
   if (loadedProfile != null && loadedProfile.getUserName().equals(userName)) {
-    MessageCli.CANNOT_DELETE_PROFILE_WHILE_LOADED.printMessage(userName);
-    return;
+  MessageCli.CANNOT_DELETE_PROFILE_WHILE_LOADED.printMessage(userName);
+  return;
   }
 
   // if the username is in the list of profile usernames, delete the profile
   if (userNamesList.contains(userName)) {
-    usersList.remove(userNamesList.indexOf(userName)); 
-    userNamesList.remove(userName);
-    MessageCli.PROFILE_DELETED.printMessage(userName);
+  usersList.remove(userNamesList.indexOf(userName)); 
+  userNamesList.remove(userName);
+  MessageCli.PROFILE_DELETED.printMessage(userName);
   } else {
-    MessageCli.NO_PROFILE_FOUND_TO_DELETE.printMessage(userName);
+  MessageCli.NO_PROFILE_FOUND_TO_DELETE.printMessage(userName);
   }
 
 }
@@ -256,8 +256,8 @@ public class InsuranceSystem {
 
   // if there is no loaded profile, we cannot create a policy for that profile
   if (loadedProfile == null) {
-    MessageCli.NO_PROFILE_FOUND_TO_CREATE_POLICY.printMessage();
-    return;
+  MessageCli.NO_PROFILE_FOUND_TO_CREATE_POLICY.printMessage();
+  return;
   }
 
   int ageForInsurance = loadedProfile.getAge();
@@ -271,36 +271,36 @@ public class InsuranceSystem {
   // that particular type
   switch (type) {
 
-    // add a home insurance for that profile
-    case HOME:
-    user.addHomeInsurance(options, loadedProfile.getUserName());
-    MessageCli.NEW_POLICY_CREATED.printMessage("home",loadedProfile.getUserName());
-    break;
+  // add a home insurance for that profile
+  case HOME:
+  user.addHomeInsurance(options, loadedProfile.getUserName());
+  MessageCli.NEW_POLICY_CREATED.printMessage("home",loadedProfile.getUserName());
+  break;
 
-    // add a life insurance for that profile, after filtering out the cases
-    // where we cannot create a life insurance: when the user's age is over
-    // 100 or if the user already has a life policy
-    case LIFE:
-    if (ageForInsurance > 100) {
-      MessageCli.OVER_AGE_LIMIT_LIFE_POLICY.printMessage(loadedProfile.getUserName());
-      break;
-    } else if (livesInsuranceNamesList.contains(loadedProfile.getUserName())) {
-      MessageCli.ALREADY_HAS_LIFE_POLICY.printMessage(loadedProfile.getUserName());
-      break;
-    } 
-      
-    user.addLifeInsurance(options, ageForInsurance, loadedProfile.getUserName());
-    livesInsuranceNamesList.add(loadedProfile.getUserName());
-    MessageCli.NEW_POLICY_CREATED.printMessage("life",loadedProfile.getUserName());
-    
+  // add a life insurance for that profile, after filtering out the cases
+  // where we cannot create a life insurance: when the user's age is over
+  // 100 or if the user already has a life policy
+  case LIFE:
+  if (ageForInsurance > 100) {
+    MessageCli.OVER_AGE_LIMIT_LIFE_POLICY.printMessage(loadedProfile.getUserName());
     break;
-    
-    // add a car insurance for that profile
-    case CAR:
-    user.addCarInsurance(options, ageForInsurance, loadedProfile.getUserName());
-    MessageCli.NEW_POLICY_CREATED.printMessage("car",loadedProfile.getUserName());
+  } else if (livesInsuranceNamesList.contains(loadedProfile.getUserName())) {
+    MessageCli.ALREADY_HAS_LIFE_POLICY.printMessage(loadedProfile.getUserName());
+    break;
   } 
     
+  user.addLifeInsurance(options, ageForInsurance, loadedProfile.getUserName());
+  livesInsuranceNamesList.add(loadedProfile.getUserName());
+  MessageCli.NEW_POLICY_CREATED.printMessage("life",loadedProfile.getUserName());
+  
+  break;
+  
+  // add a car insurance for that profile
+  case CAR:
+  user.addCarInsurance(options, ageForInsurance, loadedProfile.getUserName());
+  MessageCli.NEW_POLICY_CREATED.printMessage("car",loadedProfile.getUserName());
+  } 
+  
 }
 
 }
