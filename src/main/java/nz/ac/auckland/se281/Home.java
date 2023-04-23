@@ -1,7 +1,7 @@
 package nz.ac.auckland.se281;
 
 public class Home extends PolicyType {
-  private String address; 
+  private String address;
   private double basePremium;
   private double discountedPremium;
 
@@ -14,10 +14,10 @@ public class Home extends PolicyType {
     } else {
       this.basePremium = 0.01 * sumInsured;
     }
-    
+
     this.discountedPremium = this.basePremium;
   }
-  
+
   /**
    * @return the basePremium
    */
@@ -36,6 +36,7 @@ public class Home extends PolicyType {
 
   /**
    * set the discountedPremium using the calculated discounted premium
+   *
    * @param calcDiscountedPremium to set the discountedPremium as this value
    */
   @Override
@@ -51,6 +52,3 @@ public class Home extends PolicyType {
     return (int) this.discountedPremium;
   }
 }
-
-
-

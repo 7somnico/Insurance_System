@@ -6,24 +6,29 @@ public class Car extends PolicyType {
   private int age;
   private double basePremium;
   private double discountedPremium;
-  
-  public Car(int sumInsured, String makeAndModel, String licensePlate,
-  String mechanicalBreakdown, int age, String userName) {
+
+  public Car(
+      int sumInsured,
+      String makeAndModel,
+      String licensePlate,
+      String mechanicalBreakdown,
+      int age,
+      String userName) {
     super(sumInsured, userName);
     this.makeAndModel = makeAndModel;
     this.licensePlate = licensePlate;
     this.age = age;
-    
+
     if (this.age < 25) {
       this.basePremium = 0.15 * sumInsured;
     } else {
       this.basePremium = 0.1 * sumInsured;
     }
-    
+
     if (mechanicalBreakdown.equals("yes")) {
       this.basePremium = basePremium + 80;
     }
-    
+
     this.discountedPremium = this.basePremium;
   }
 
@@ -34,7 +39,7 @@ public class Car extends PolicyType {
   public int getBasePremium() {
     return (int) basePremium;
   }
-  
+
   /**
    * @return the makeAndModel
    */
@@ -42,16 +47,17 @@ public class Car extends PolicyType {
   public String getMakeAndModel() {
     return makeAndModel;
   }
-  
+
   /**
    * set the discountedPremium using the calculated discounted premium
+   *
    * @param calcDiscountedPremium to set the discountedPremium as this value
    */
   @Override
   public void setDiscountedPremium(int calcDiscountedPremium) {
     this.discountedPremium = calcDiscountedPremium;
   }
-  
+
   /**
    * @return the discountedPremium
    */
