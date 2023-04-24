@@ -63,10 +63,11 @@ public class InsuranceSystem {
               user.endingForPrintingPolicy(),
               user.getTotalCosts(user));
         }
-
-        // print the policies each user has signed themselves on
-        user.printPolicies(user);
+        
       }
+
+      // print the policies each user has signed themselves on
+      user.printPolicies(user);
 
       // for any number of profiles greater or equal to two profiles
     } else {
